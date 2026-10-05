@@ -10,6 +10,8 @@ Shared development skills for AI coding agents.
 
 ### Claude Code (plugin)
 
+Run these inside a Claude Code session (start it with `claude`), not in your shell:
+
 ```
 /plugin marketplace add slovensko-digital/skills
 /plugin install dev@slovensko-digital
