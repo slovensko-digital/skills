@@ -1,0 +1,11 @@
+{
+  "name": "slovensko-digital",
+  "owner": { "name": "Slovensko.Digital" },
+  "plugins": [
+    {
+      "name": "dev",
+      "source": "./",
+      "description": "Shared development workflow skills"
+    }
+  ]
+}
