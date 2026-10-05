@@ -39,3 +39,18 @@ ln -s ~/Sites/slovensko-digital/skills/skills/prepare-pr-for-review ~/.claude/sk
 ```
 
 Use the skills folder of your agent instead of `~/.claude/skills`. Update with `git pull`.
+
+## Add or change a skill
+
+1. Add or edit `skills/<skill-name>/SKILL.md` (frontmatter with `name` and `description`, then instructions). Supporting files go in the same folder.
+2. Add new skills to the table above.
+3. Bump `version` in `.claude-plugin/plugin.json`, otherwise installed plugins won't pick up the change.
+4. Validate and try it out:
+
+   ```
+   claude plugin validate .
+   claude --plugin-dir .
+   ```
+
+   The second command starts Claude Code with the plugin loaded from your working copy, so you can test the skill before pushing.
+5. Open a PR.
