@@ -20,7 +20,15 @@ Run these inside a Claude Code session (start it with `claude`), not in your she
 Then just ask "open a PR", or run `/dev:prepare-pr-for-review`.
 Update with `/plugin marketplace update slovensko-digital`.
 
-To get it suggested automatically in a repo, commit this to that repo's `.claude/settings.json`:
+#### Install for all collaborators on a repo
+
+To get it suggested automatically to everyone working on a repo, run `/plugin` inside that repo, open `dev` in the Discover tab and choose **Install for all collaborators on this repository (project scope)**:
+
+![Installing the plugin in project scope](docs/install-project-scope.png)
+
+This writes the plugin to the repo's `.claude/settings.json`. Commit that file. Collaborators are then asked to install the plugin when they trust the repo's folder in Claude Code.
+
+You can also add it to `.claude/settings.json` by hand:
 
 ```json
 {
