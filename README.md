@@ -10,6 +10,8 @@ Shared development skills for AI coding agents.
 
 ### Claude Code (plugin)
 
+Run these inside a Claude Code session (start it with `claude`), not in your shell:
+
 ```
 /plugin marketplace add slovensko-digital/skills
 /plugin install dev@slovensko-digital
@@ -53,4 +55,6 @@ Use the skills folder of your agent instead of `~/.claude/skills`. Update with `
    ```
 
    The second command starts Claude Code with the plugin loaded from your working copy, so you can test the skill before pushing.
-5. Open a PR.
+5. Open a PR. This repo uses its own `prepare-pr-for-review` skill via the symlink in `.claude/skills/`, so just ask Claude to "open a PR".
+
+To use a new skill in this repo too, symlink it: `ln -s ../../skills/<skill-name> .claude/skills/<skill-name>`.
