@@ -1,11 +1,11 @@
 ## The problem
 
-<!-- What is broken, missing, or painful today, and for whom? Link the issue (e.g. "Closes #123" or the full issue URL). Describe current behaviour and why it matters, not the code. -->
+<!-- Link the issue (e.g. "Closes #123"). 1-3 sentences: what is wrong today and for whom. -->
 
 ## Solution
 
-<!-- The approach taken in this PR and the key decisions behind it. Mention alternatives you rejected, anything intentionally left out, and how a reviewer can verify it. -->
+<!-- What changed and why, in a few bullets. One line on how to verify. -->
 
 ## Demo
 
-<!-- Screenshots, a demo video, or a link to one, showing the change in action. Write "Not applicable" for changes with nothing to show (e.g. refactors, CI, docs). -->
+<!-- Screenshots or a video link. "Not applicable" for refactors, CI, docs. -->

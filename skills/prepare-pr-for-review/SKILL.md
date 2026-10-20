@@ -69,27 +69,27 @@ Weak: `changes to issues controller`
 Fill the template sections. Match the language the user is writing in during the
 conversation; default to English.
 
-**The problem.** Describe the situation before this PR from the perspective of the
-person affected: what they do, what happens, what they expected, and why it matters.
-Start with the issue link (`Closes #123` or the full URL) so it auto-closes on merge.
-Two to five sentences is typical. Avoid describing the code here; "the callback set the
-wrong state" is a cause, not a problem. "When an author marks their own issue as
-resolved, it only shows as *marked* resolved and stays open for operators" is a problem.
+Keep it short and to the point. Reviewers skim; every sentence must tell them
+something the diff does not. No preamble, no restating the title, no summaries of
+what each file does, no filler like "This PR ...". Prefer short bullets over
+paragraphs. If a sentence can be cut without losing information, cut it.
 
-**Solution.** Explain the approach and the decisions a reviewer could reasonably
-question: why this approach, what alternatives were rejected and why, what is
-deliberately out of scope, and any follow-up needed. Point at the one or two files
-where the interesting logic lives. Finish with how to verify (test command, manual
-steps, or screenshot). Do not list every changed file; the diff already does that.
+**The problem.** Start with the issue link (`Closes #123` or the full URL) so it
+auto-closes on merge. Then one to three sentences from the perspective of the person
+affected: what happens today and why it matters. Describe the problem, not the code;
+"the callback set the wrong state" is a cause, not a problem.
+
+**Solution.** What changed and why, in a few bullets or sentences. Mention a rejected
+alternative, an out-of-scope item or a follow-up only when a reviewer would otherwise
+ask about it. Point at the file with the interesting logic if it is not obvious. End
+with one line on how to verify. Do not list changed files.
 
 **Demo.** Show the change working: screenshots, a demo video, or a link to one.
 Use whatever the user provided in the conversation (image markdown, GitHub asset URLs,
 Loom or similar links) verbatim. If they provided nothing and the change has a visible
-effect, ask for a screenshot or recording before opening the PR; a reviewer who can see
-the result rarely needs to run the branch. For changes with nothing to show, such as
-refactors, CI, seeds or docs, write "Not applicable" and say why in a few words. Do not
-delete the heading; an empty or missing section reads as forgotten rather than
-intentional.
+effect, ask for a screenshot or recording before opening the PR. For changes with
+nothing to show, such as refactors, CI, seeds or docs, write "Not applicable" with a
+few-word reason. Do not delete the heading; a missing section reads as forgotten.
 
 ### 5. Create or update the PR
 
@@ -116,28 +116,18 @@ anything without opening the browser.
 
 Closes https://github.com/acme/helpdesk/issues/1237
 
-When the author of an issue marks it as resolved, the issue is only flagged as
-"marked as resolved" and stays in the operators' queue until someone confirms it.
-For the author's own issues this confirmation step is pointless, so issues pile up
-in the queue with nothing for operators to do.
+When authors resolve their own issue, it only becomes "marked as resolved" and sits
+in the operators' queue waiting for a pointless confirmation.
 
 ## Solution
 
-Treat a resolving update from the issue's author as a final resolution. In
-`Issues::IssuesUpdatesController#create` the issue now moves to the `resolved` state
-instead of `marked_as_resolved` when the update's author is the issue author. Updates
-from other users are unchanged, so the confirmation flow for third-party resolutions
-still applies.
+- An author resolving their own issue now moves it straight to `resolved`
+  (`Issues::IssuesUpdatesController#create`).
+- Resolutions by other users still go through confirmation.
 
-I considered adding a separate "resolve immediately" action, but that duplicates the
-button for a single role; changing the target state in the existing branch keeps the
-UI as it is.
-
-Verify: run the issues controller tests, or open one of your own issues, click
-*Resolve*, and check that it disappears from the operators' queue.
+Verify: resolve one of your own issues; it leaves the operators' queue.
 
 ## Demo
 
-Not applicable, the change is a single state transition with no UI change; the
-verification steps above cover it.
+Not applicable, no UI change.
 ```
