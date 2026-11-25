@@ -47,27 +47,14 @@ class ExplorationsController < ActionController::Base
     )
   end
 
+  # Structure only: give it the app's own look with the app's classes.
   LISTING = <<~ERB
     <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
       <title>Explorations</title>
-      <style>
-        @font-face { font-family: "GeneralSans-Variable"; src: url("<%= asset_path("GeneralSans-Variable.woff2") %>") format("woff2"); font-weight: 200 700; }
-        body { color: #1c3054; font: 500 16px/1.6 "GeneralSans-Variable", sans-serif; font-variant-numeric: tabular-nums; margin: 40px auto; max-width: 900px; padding: 0 20px; }
-        h1 { font-weight: 700; }
-        ul { list-style: none; margin: 0; padding: 0; }
-        li { align-items: baseline; border-bottom: 1px solid #e3e7ee; display: flex; gap: 24px; justify-content: space-between; padding: 10px 0; }
-        a { color: inherit; text-decoration: none; }
-        a:hover .title { text-decoration: underline; }
-        .time { color: #6b7790; margin-right: 16px; }
-        .meta { text-align: right; }
-        .note { color: #6b7790; margin-right: 8px; }
-        .note a { text-decoration: underline; }
-        .status { font-weight: 600; }
-        .open { color: #0a6fb8; } .chosen { color: #1a7f37; } .dropped { color: #888; }
-      </style>
+      <%= stylesheet_link_tag "application" %>
     </head>
     <body>
       <h1>Explorations</h1>

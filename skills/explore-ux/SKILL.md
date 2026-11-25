@@ -49,9 +49,9 @@ The dev server serves `explorations/` so people browse it at `/explorations`
   end
   ```
 
-  The listing's inline `<style>` is an example taken from another app: replace its font,
-  colours and spacing with this app's (its font asset, colour variables), keeping the
-  layout: date and name as the link on the left, note and status on the right.
+  The listing ships unstyled. Style it with the app's own stylesheet and classes,
+  keeping the layout: one row per exploration, date and name as the link on the left,
+  note and status on the right.
   Tell the user this is a one-time setup and part of the change to commit.
 - **Other stacks:** serve the folder the way the dev server serves static files
   (development only), or as a last resort `python3 -m http.server` from `explorations/`.
