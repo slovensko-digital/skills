@@ -19,7 +19,15 @@ Run these inside a Claude Code session (start it with `claude`), not in your she
 ```
 
 Then just ask "open a PR", or run `/dev:prepare-pr-for-review`.
-Update with `/plugin marketplace update slovensko-digital`.
+Update with both commands, then restart Claude Code:
+
+```
+/plugin marketplace update slovensko-digital
+/plugin update dev@slovensko-digital
+```
+
+The first only refreshes the marketplace; the second updates the installed plugin.
+A project-scope install is updated per project: run it inside each one.
 
 #### Install for all collaborators on a repo
 
