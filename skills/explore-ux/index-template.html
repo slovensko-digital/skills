@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- Structure only. Classes are placeholders: replace them with the app's own
+     nav, notice and card components. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{Exploration name}}</title>
+  <meta name="exploration-status" content="open">
+  <meta name="exploration-note" content="">
+  <link rel="stylesheet" href="assets/app.css">
+  <link rel="stylesheet" href="assets/proto.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+<nav class="proto-bar">
+  <a href="/explorations">Explorations</a>
+  <a href="index.html" aria-current="page"><strong>{{Exploration name}}</strong></a>
+  <a href="0-current.html">0 · {{Today}}</a>
+  <a href="a-{{slug}}.html">A · {{Option A}}</a>
+</nav>
+<div class="proto-page">
+  <div class="proto-index proto-doc">
+    <h1>{{Exploration name}}</h1>
+    <p class="proto-meta">Started {{YYYY-MM-DD HH:MM}} UTC · Page: {{page, field}} · Status: <strong>open</strong></p>
+
+    <h2>Prompt</h2>
+    <pre class="proto-prompt">{{first prompt, verbatim, HTML-escaped}}</pre>
+
+    <h2>Problems</h2>
+    <ul>
+      <li>{{problem}}</li>
+    </ul>
+
+    <h2>Ideas</h2>
+    <ul>
+      <li><em>User:</em> {{idea}} → A</li>
+      <li><em>Suggested:</em> {{idea}} → B</li>
+    </ul>
+
+    <h2>Options</h2>
+    <ol>
+      <li><a class="proto-card" href="0-current.html"><strong>0 · {{Today}}</strong><span>Production behaviour as a baseline.</span></a></li>
+      <li><a class="proto-card" href="a-{{slug}}.html"><strong>A · {{Option A}}</strong><span>{{one line}}</span></a></li>
+    </ol>
+
+    <h2>Decision</h2>
+    <p>Not decided yet.</p>
+
+    <h2>Rounds</h2>
+    <ol class="proto-rounds" reversed>
+      <li><time>{{YYYY-MM-DD HH:MM}}</time> Round 1: 0, A, B.</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>
