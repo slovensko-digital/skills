@@ -5,6 +5,7 @@ Shared development skills for AI coding agents.
 | Skill | What it does |
 | --- | --- |
 | `prepare-pr-for-review` | Opens or updates a GitHub PR with a "The problem / Solution / Demo" description |
+| `explore-ux` | Explores UX options for one piece of functionality as static pages in the app's look, kept in a dated `explorations/` folder with problems, options, decision and rounds |
 
 ## Install
 
