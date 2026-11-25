@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- Structure only. Style it inline with the app's own colours and font.
+     One <li> per exploration, newest first. Status: open | chosen | dropped. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Explorations</title>
+  <style></style>
+</head>
+<body>
+  <h1>Explorations</h1>
+  <ul>
+    <li>
+      <a href="{{folder}}/index.html"><time>{{YYYY-MM-DD HH:MM}}</time> <span class="title">{{Exploration name}}</span></a>
+      <span class="meta"><span class="note">{{note, e.g. A4, implemented in <a href="{{PR url}}">PR #102</a>}}</span> <span class="status {{status}}">{{status}}</span></span>
+    </li>
+  </ul>
+</body>
+</html>

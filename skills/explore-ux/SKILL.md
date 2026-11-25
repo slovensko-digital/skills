@@ -18,6 +18,7 @@ same exploration, not new explorations.
 
 ```
 explorations/
+  index.html                         # the listing: one row per exploration, kept by hand
   20261123103245_preferred_places/   # UTC timestamp of the first prompt + snake_case name
     index.html                       # the record: prompt, problems, ideas, options, decision, rounds
     0-current.html                   # today's behaviour, 1:1 with production
@@ -34,32 +35,30 @@ explorations/
 
 ### 1. Make sure explorations are served
 
-The dev server serves `explorations/` so people browse it at `/explorations`
-(a one-line-per-exploration listing) and `/explorations/<folder>/`.
+The dev server serves `explorations/` as static files, so people browse the listing at
+`/explorations` and an exploration at `/explorations/<folder>/index.html`. No controller:
+the listing is a static `explorations/index.html` you keep up to date.
 
-- **Rails:** if `/explorations` is not routed yet, copy
-  [rails/explorations_controller.rb](rails/explorations_controller.rb) to
-  `app/controllers/` and add, next to other development-only routes and before any
-  catch-all route:
+- **Rails:** if `/explorations` is not routed yet, add next to other development-only
+  routes and before any catch-all route:
 
   ```ruby
   if Rails.env.development?
-    get "explorations" => "explorations#index"
-    get "explorations/*path" => "explorations#show", format: false
+    get "explorations", to: redirect("/explorations/index.html")
+    mount Rack::Files.new(Rails.root.join("explorations"), "cache-control" => "no-store"), at: "/explorations"
   end
   ```
 
-  The listing ships unstyled. Style it with the app's own stylesheet and classes,
-  keeping the layout: one row per exploration, date and name as the link on the left,
-  note and status on the right.
-  Tell the user this is a one-time setup and part of the change to commit.
+  `Rack::Files` serves no directory index, so links always end in `index.html`.
 - **Other stacks:** serve the folder the way the dev server serves static files
   (development only), or as a last resort `python3 -m http.server` from `explorations/`.
+- If `explorations/index.html` does not exist, create it from
+  [listing-template.html](listing-template.html), styled inline with the app's own
+  colours and font (the app's digested assets cannot be linked from a static page).
+- Tell the user this is a one-time setup and part of the change to commit.
 
-Once `/explorations` is set up, leave it as it is: do not change the listing's markup or
-styling, the controller or the routes in later runs. The same goes for the exploration
-pages' shell (top bar, note box, index page): new explorations copy the shell of the
-latest existing exploration instead of restyling it.
+After setup, only add or update listing rows. New explorations copy the shell (top bar,
+note box, index page) of the latest one.
 
 ### 2. Problems and ideas
 
@@ -124,16 +123,13 @@ Start from [index-template.html](index-template.html). It contains, in order:
 6. **Decision:** what was chosen (or combined) and why, known trade-offs, link to the PR.
 7. **Rounds:** newest first, `YYYY-MM-DD HH:MM` (UTC) and one or two lines each.
 
-Status lives in two meta tags the listing reads:
+Add the exploration's row at the top of `explorations/index.html` (newest first): start
+time, name linking to `<folder>/index.html`, a short note and the status.
 
-```html
-<meta name="exploration-status" content="open">   <!-- open | chosen | dropped -->
-<meta name="exploration-note" content="A4, implemented in PR #102">
-```
-
-- `open` while exploring; `chosen` when the user picks one or combines several
+- Status is `open` while exploring; `chosen` when the user picks one or combines several
   (note says which: `A4`, `A2 + C`); `dropped` when the idea is abandoned (note says why).
-- `PR #123` in the note becomes a link to the pull request in the listing.
+- A PR in the note is a plain link to the pull request.
+- Keep the status in the row and the meta line of the exploration's `index.html` in step.
 
 ### 6. Rounds
 
@@ -144,19 +140,18 @@ Every follow-up prompt in the exploration is a round:
 - A new direction or variation gets a new page (`A3`); do not overwrite an option the
   user has seen, unless they ask to fix it. Fixes to all options are one round entry.
 - Never delete option pages. Parked options stay listed so the comparison stays honest.
-- When the user decides, update **Decision**, the option cards and the status meta.
+- When the user decides, update **Decision**, the option cards, the status in the meta line and the listing row.
 
 ### 7. Check and hand over
 
 - Open every new or changed page in the browser if available, try the interaction,
   look at the not-found/empty states.
-- Reply with the link (`/explorations/<folder>/` on the dev server) and what to look at,
+- Reply with the link (`/explorations/<folder>/index.html` on the dev server) and what to look at,
   one line per option. Mention trade-offs you noticed and which option you would pick.
 
 ## Rules
 
 - Do not change the app's own code while exploring, except the one-time serving setup.
-  After setup, never change the listing's or the shell's styling.
   Implementing the chosen option is a separate step the user asks for; the exploration
   folder stays as it is and gets a round entry and the PR link.
 - Accessibility counts: check contrast of any new colour against WCAG AA and say so in
