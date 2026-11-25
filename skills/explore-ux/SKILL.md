@@ -56,6 +56,11 @@ The dev server serves `explorations/` so people browse it at `/explorations`
 - **Other stacks:** serve the folder the way the dev server serves static files
   (development only), or as a last resort `python3 -m http.server` from `explorations/`.
 
+Once `/explorations` is set up, leave it as it is: do not change the listing's markup or
+styling, the controller or the routes in later runs. The same goes for the exploration
+pages' shell (top bar, note box, index page): new explorations copy the shell of the
+latest existing exploration instead of restyling it.
+
 ### 2. Problems and ideas
 
 The exploration starts from **problems**, not solutions.
@@ -151,6 +156,7 @@ Every follow-up prompt in the exploration is a round:
 ## Rules
 
 - Do not change the app's own code while exploring, except the one-time serving setup.
+  After setup, never change the listing's or the shell's styling.
   Implementing the chosen option is a separate step the user asks for; the exploration
   folder stays as it is and gets a round entry and the PR link.
 - Accessibility counts: check contrast of any new colour against WCAG AA and say so in
