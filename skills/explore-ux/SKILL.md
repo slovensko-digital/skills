@@ -57,10 +57,8 @@ the listing is a static `explorations/index.html` you keep up to date.
   colours and font (the app's digested assets cannot be linked from a static page).
 - Tell the user this is a one-time setup and part of the change to commit.
 
-Once `/explorations` is set up, leave it as it is: in later runs only add or update rows
-in the listing, never its styling or the routes. The same goes for the exploration
-pages' shell (top bar, note box, index page): new explorations copy the shell of the
-latest existing exploration instead of restyling it.
+After setup, only add or update listing rows. New explorations copy the shell (top bar,
+note box, index page) of the latest one.
 
 ### 2. Problems and ideas
 
@@ -154,7 +152,6 @@ Every follow-up prompt in the exploration is a round:
 ## Rules
 
 - Do not change the app's own code while exploring, except the one-time serving setup.
-  After setup, never change the listing's or the shell's styling.
   Implementing the chosen option is a separate step the user asks for; the exploration
   folder stays as it is and gets a round entry and the PR link.
 - Accessibility counts: check contrast of any new colour against WCAG AA and say so in
